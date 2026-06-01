@@ -178,7 +178,7 @@ def login():
 
     elif role == 'faculty':
         cursor.execute(
-            "SELECT * FROM faculty WHERE faculty_id=%s AND password=%s",
+            "SELECT * FROM faculty WHERE faculty_id=? AND password=?",
             (username, password)
         )
         user = cursor.fetchone()
@@ -192,7 +192,7 @@ def login():
 
     elif role == 'student':
         cursor.execute(
-            "SELECT * FROM students WHERE reg_no=%s",
+            "SELECT * FROM students WHERE reg_no=?",
             (username,)
         )
         user = cursor.fetchone()
@@ -224,13 +224,13 @@ def student_dashboard():
     cursor = db.cursor()
     cursor.execute("""
         SELECT subject, date, time, status FROM attendance
-        WHERE student_id = (SELECT id FROM students WHERE reg_no = %s)
+        WHERE student_id = (SELECT id FROM students WHERE reg_no = ?)
         ORDER BY date DESC, time DESC
     """, (reg_no,))
     records = cursor.fetchall()
     cursor.execute("""
         SELECT subject, COUNT(*) FROM attendance
-        WHERE student_id = (SELECT id FROM students WHERE reg_no = %s)
+        WHERE student_id = (SELECT id FROM students WHERE reg_no = ?)
         GROUP BY subject
     """, (reg_no,))
     subject_stats = cursor.fetchall()
@@ -301,7 +301,7 @@ def register():
         db = connect_db()
         cursor = db.cursor()
         cursor.execute(
-            "INSERT INTO students (name, reg_no, department, class) VALUES (%s,%s,%s,%s)",
+            "INSERT INTO students (name, reg_no, department, class) VALUES (?,?,?,?)",
             (name, reg_no, department, class_name)
         )
         db.commit()
