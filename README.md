@@ -48,3 +48,10 @@ It helps institutions maintain records efficiently while reducing human error an
 ---
 
 ## 🏗️ Project Architecture
+UI (HTML/CSS/JS)
+        ↓
+Flask Backend (Python)
+        ↓
+MySQL Database
+        ↓
+Response Rendering
