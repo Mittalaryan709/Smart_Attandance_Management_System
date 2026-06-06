@@ -4,7 +4,7 @@
 
 🔗 Live Demo: https://smart-attandance-management-system.onrender.com/
 
----
+----
 
 ## 📌 About the Project
 
